@@ -1,0 +1,31 @@
+{% extends "myapp/base.html" %}
+{% block body%}
+<!--    {% for task in task_list %}
+        {{task.name}} -- {{task.priority}} -- {{task.start_date}} -- {{task.end_date}} -- {{task.description}} -- {{task.status}}
+        <br/>
+    {% endfor %} 
+-->
+<div class="container" style="width: 89vw;">
+    <div class="row">
+        <div class="col-sm-12 m-3">
+            <h1 class="text-center text-warning">Task Details</h1>
+        </div>
+        {% for task in task_list %}
+        <div class="col-sm-6 col-md-4 mt-2">
+            <div class="card">
+                <div class="card-body">
+                  <h5 class="card-title">{{task.name}}</h5>
+                  <p class="card-text">{{task.priority}}</p>
+                  <p class="card-text">{{task.description}}</p>
+                  <p class="card-text">{{task.status}}</p>
+                  <p class="card-text">{{task.start_date}}</p>
+                  <p class="card-text">{{task.end_date}}</p>
+                  <a href="#" class="btn btn-success">Update</a>
+                  <a href="#" class="btn btn-danger">Delete</a>
+                </div>
+            </div>
+        </div>
+        {% endfor %}    
+    </div>
+</div>
+{% endblock%}
