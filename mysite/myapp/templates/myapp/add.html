@@ -1,6 +1,75 @@
 {% extends "myapp/base.html" %}
 {% block body %}
 
+<div class="container" style="margin: 0px;font-family: roboto;">
+    <div class="row" style="height: 18vh; width: 99vw; background-color: rgb(202, 94, 175);">
+    <div class="col-12 card-header d-flex flex-direction-column justify-content-center align-items-center">
+        <h1 class="card-title text-white" style="font-size: 60px; font-weight: 600 ;font-family: roboto;">TODO</h1>
+    </div>
+    </div>
+    <div class="row" style="min-height: 80vh; width: 99vw; background-size: cover;background-image: url(https://img.freepik.com/free-photo/vivid-blurred-colorful-background_58702-2554.jpg)"> <!--background-size: cover;background-image: url(https://img.freepik.com/free-photo/vivid-blurred-colorful-background_58702-2554.jpg)-->
+        <!--<div class="col-12 card-header">TODO</div>-->
+        <!--form-->
+        
+        <div class="card-body col-md-4  mt-5 d-flex flex-direction-column justify-content-start align-items-start">
+        <form class="card pl-5 pr-5 bg-transparent  shadow rounded" method = "POST">
+            <h1 class="text-center mt-2 mb-3">Add Task</h1>
+            {% csrf_token %}
+            <div class="form-group">    
+                <input type="text" class="form-control" name="name" id="name" placeholder="Enter Task Name">
+            </div>
+            <div class="form-group">
+                <input type="text" class="form-control" name="priority" id="priority" placeholder="Enter Task Prioity">
+            </div>
+            <div class="form-group">
+                <input type="text" class="form-control" name="description" id="description" placeholder="Enter Task Description">
+            </div>
+            <div class="form-group">
+                <input type="text" class="form-control" name="status" id="status" placeholder="Enter Task Status">
+            </div>
+            <div class="form-group">
+                <input type="date" class="form-control" name="start_date" id="start_date">
+            </div>
+            <div class="form-group">
+                <input type="date" class="form-control" name="end_date" id="end_date">
+            </div>
+            <input class="btn btn-success mb-3" type="submit">
+        </form>
+        </div>
+        <!--tasks-->
+        <div class="col-md-8">
+            <div class="col-sm-12 m-3">
+                <h1 class="text-center" style="color: rgb(6, 2, 228);">Task Details</h1>
+            </div>
+            <div class="row">
+            {% for task in task_list %}
+            <div class="col-sm-6 col-md-4 mt-2 mb-2">
+                <div class="card shadow rounded" style="background-color: rgb(157, 24, 197);">
+                    <div class="card-header text-white">
+                        <h3 class="card-title">{{task.name}}</h3>
+                    </div>
+                    <div class="card-body" style="border-bottom-left-radius: 3px; border-bottom-right-radius: 3px; background-color: rgb(224, 243, 252);">
+                      <!--<h5 class="card-title">{{task.name}}</h5>-->
+                      <p class="card-text"><span style="color: black; font-weight: 600;">Priority :</span> {{task.priority}}</p>
+                      <p class="card-text"><span style="color: black; font-weight: 600;">Description :</span> {{task.description}}</p>
+                      <p class="card-text"><span style="color: black; font-weight: 600;">Status :</span> {{task.status}}</p>
+                      <p class="card-text"><span style="color: black; font-weight: 600;">Date :</span> {{task.start_date}}</p>
+                      <p class="card-text"><span style="color: black; font-weight: 600;">Date :</span> {{task.end_date}}</p>
+                      <a href="#" class="btn btn-success">Update</a>
+                      <a href="{% url 'delete' id=task.id %}" class="btn btn-danger">Delete</a>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+<!--
 <div class="container">
     <div class="row" style="height: 80vh;">
         <div class="col-md-6"></div>
@@ -32,7 +101,6 @@
 </div></div>
 {%endblock%}
 
-<!--
 <form method = "POST">
     {% csrf_token %}
     <input type="text" name="name" id="name" placeholder="Enter Task Name">

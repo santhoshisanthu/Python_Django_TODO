@@ -1,4 +1,4 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render,redirect
 from .models import Task
 # Create your views here.
 
@@ -12,8 +12,14 @@ def add(request):
         status = request.POST.get('status','')
         task = Task(name = name, priority = priority, start_date = start_date, end_date = end_date, description = description, status = status)
         task.save()
-        return redirect('/')
-    return render(request,'myapp/add.html')
+    task_list = Task.objects.all()
+    return render(request, 'myapp/add.html', {'task_list': task_list})
+    #return render(request,'myapp/add.html')
 def home (request):
     task_list = Task.objects.all()
     return render(request, 'myapp/home.html', {'task_list': task_list})
+def delete(request, id):
+    task = Task.objects.get(id=id)
+    task.delete()
+    # print(id)
+    return redirect('add')
