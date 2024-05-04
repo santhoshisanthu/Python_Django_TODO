@@ -1,13 +1,13 @@
 {% extends "myapp/base.html" %}
 {% block body %}
 
-<div class="container" style="margin: 0px;font-family: roboto;">
-    <div class="row" style="height: 18vh; width: 99vw; background-color: rgb(202, 94, 175);">
+<div class="container main-container">
+    <div class="row Todo-bg-color">
     <div class="col-12 card-header d-flex flex-direction-column justify-content-center align-items-center">
-        <h1 class="card-title text-white" style="font-size: 60px; font-weight: 600 ;font-family: roboto;">TODO</h1>
+        <h1 class="card-title text-white Todo-Heading-color">TODO</h1>
     </div>
     </div>
-    <div class="row" style="min-height: 80vh; width: 99vw; background-size: cover;background-image: url(https://img.freepik.com/free-photo/vivid-blurred-colorful-background_58702-2554.jpg)"> <!--background-size: cover;background-image: url(https://img.freepik.com/free-photo/vivid-blurred-colorful-background_58702-2554.jpg)-->
+    <div class="row Bg-image-card"> <!--background-size: cover;background-image: url(https://img.freepik.com/free-photo/vivid-blurred-colorful-background_58702-2554.jpg)-->
         <!--<div class="col-12 card-header">TODO</div>-->
         <!--form-->
         
@@ -33,30 +33,32 @@
             <div class="form-group">
                 <input type="date" class="form-control" name="end_date" id="end_date">
             </div>
-            <input class="btn btn-success mb-3" type="submit">
+            <input class="btn btn-success mb-3" onclick="return confirm('Are you sure you want to add this task.')" type="submit">
         </form>
         </div>
         <!--tasks-->
         <div class="col-md-8">
             <div class="col-sm-12 m-3">
-                <h1 class="text-center" style="color: rgb(6, 2, 228);">Task Details</h1>
+                <h1 class="text-center Task-Heading">Task Details</h1>
             </div>
             <div class="row">
             {% for task in task_list %}
             <div class="col-sm-6 col-md-4 mt-2 mb-2">
-                <div class="card shadow rounded" style="background-color: rgb(157, 24, 197);">
+                <div class="card shadow rounded Taskname-bg-color">
                     <div class="card-header text-white">
                         <h3 class="card-title">{{task.name}}</h3>
                     </div>
-                    <div class="card-body" style="border-bottom-left-radius: 3px; border-bottom-right-radius: 3px; background-color: rgb(224, 243, 252);">
+                    <div class="card-body card-color">
                       <!--<h5 class="card-title">{{task.name}}</h5>-->
-                      <p class="card-text"><span style="color: black; font-weight: 600;">Priority :</span> {{task.priority}}</p>
-                      <p class="card-text"><span style="color: black; font-weight: 600;">Description :</span> {{task.description}}</p>
-                      <p class="card-text"><span style="color: black; font-weight: 600;">Status :</span> {{task.status}}</p>
-                      <p class="card-text"><span style="color: black; font-weight: 600;">Date :</span> {{task.start_date}}</p>
-                      <p class="card-text"><span style="color: black; font-weight: 600;">Date :</span> {{task.end_date}}</p>
-                      <a href="#" class="btn btn-success">Update</a>
-                      <a href="{% url 'delete' id=task.id %}" class="btn btn-danger">Delete</a>
+                      <p class="card-text"><span class="Task text-info">Priority :</span> {{task.priority}}</p>
+                      <p class="card-text"><span class="Task text-info">Description :</span> {{task.description}}</p>
+                      <p class="card-text"><span class="Task text-info">Status :</span> {{task.status}}</p>
+                      <p class="card-text"><span class="Task text-info">Date :</span> {{task.start_date}}</p>
+                      <p class="card-text"><span class="Task text-info">Date :</span> {{task.end_date}}</p>
+                      <!--<a href="#" class="btn btn-success">Update</a>
+                      <a href="{% url 'delete' id=task.id %}" class="btn btn-danger">Delete</a>-->
+                      <button class="btn btn-danger" onclick="return confirm('Are you sure you want to delete this task.')"><a href="{% url 'delete' id=task.id %}" class="text-white">Delete</a></button>
+                      <button class="btn btn-success" onclick="return confirm('Are you sure completed this task.')"><a href="{% url 'done' id=task.id %}" class="text-white">Done</a></button>
                     </div>
                 </div>
             </div>

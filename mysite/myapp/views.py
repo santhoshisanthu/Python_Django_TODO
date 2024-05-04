@@ -23,3 +23,8 @@ def delete(request, id):
     task.delete()
     # print(id)
     return redirect('add')
+def done(request, id):
+    task = Task.objects.get(id=id)
+    task.status = "Completed"
+    task.save()
+    return redirect('add')
